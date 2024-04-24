@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/companies' , [CompanyController::class , 'index']);
     Route::post('/add-company', [CompanyController::class , 'store']);
     Route::get('/companies/{id}/edit', [CompanyController::class , 'edit']);
-    Route::post('/companies/update', [CompanyController::class , 'update']);
+    Route::post('/companies/update', [CompanyController::class, 'update']);
 });
 
 Route::post('/login' , [UserController::class , 'login']);
