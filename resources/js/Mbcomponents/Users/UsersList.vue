@@ -68,7 +68,7 @@ onMounted(()=>{
 
 </script>
 
-<style scoped>
+<style>
 /* Style for the table */
 table {
   border-collapse: collapse;

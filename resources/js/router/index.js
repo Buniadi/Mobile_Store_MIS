@@ -6,6 +6,8 @@ import Signup from "../components/SignUp/Signup.vue";
 import AddUser from "../Mbcomponents/Users/AddUser.vue";
 import Login from "../components/auth/Login.vue";
 import CompaniesList from "../Mbcomponents/Companies/CompaniesList.vue";
+import AddCompanies from "../Mbcomponents/Companies/AddCompanies.vue";
+import EditCompanies from "../Mbcomponents/Companies/EditCompanies.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -46,13 +48,29 @@ const router = createRouter({
             name: "login",
         },
         {
-            path:'/companiesList',
-            component:CompaniesList,
+            path: "/companiesList",
+            component: CompaniesList,
             name: "companiesList",
             meta: {
-                requiresAuth:true
+                requiresAuth: true,
             },
-        }
+        },
+        {
+            path: "/add-companies",
+            component: AddCompanies,
+            name: "add-companies",
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: "/companies/:id/edit",
+            name: "edit-company",
+            component: EditCompanies,
+            meta:{
+                requiresAuth: true,
+            },
+        },
     ],
 });
 
@@ -71,18 +89,16 @@ const router = createRouter({
 //   })
 
 router.beforeEach((to, from, next) => {
-
-        if (to.meta.requiresAuth && !window.user) {
-            // Redirect to login if authentication is required but user is not logged in
-            next({ name: "login" });
-        } else if (!to.meta.requiresAuth && window.user) {
-            // Redirect to users-list if authentication is required and user is logged in
-            next({ name: "users-list" });
-        } else {
-            // Continue navigation
-            next();
-        }
-
+    if (to.meta.requiresAuth && !window.user) {
+        // Redirect to login if authentication is required but user is not logged in
+        next({ name: "login" });
+    } else if (!to.meta.requiresAuth && window.user) {
+        // Redirect to users-list if authentication is required and user is logged in
+        next({ name: "users-list" });
+    } else {
+        // Continue navigation
+        next();
+    }
 });
 
 export default router;
