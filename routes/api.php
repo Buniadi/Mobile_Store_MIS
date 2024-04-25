@@ -30,6 +30,8 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('/add-company', [CompanyController::class , 'store']);
     Route::get('/companies/{id}/edit', [CompanyController::class , 'edit']);
     Route::post('/companies/update', [CompanyController::class, 'update']);
+    Route::delete('/comapanies/delete/{id}', [CompanyController::class, 'delete']);
 });
+
 
 Route::post('/login' , [UserController::class , 'login']);

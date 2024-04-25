@@ -52,17 +52,17 @@
   import { onMounted, ref } from "vue";
   import Swal from "sweetalert2";
   import InputText from "primevue/inputtext";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
   
-  
+
   const formdata = ref({
     id:"", 
     name: "",
     country: "",
   });
   
+  const router = useRouter();
   const route = useRoute();
-
 //   axios.interceptors.request.use((config) => {
 //     // Retrieve the token from where you stored it (e.g., Vuex store or localStorage)
 //     const token = localStorage.getItem("token"); // Make sure to replace 'token' with your actual token key
@@ -77,7 +77,6 @@ import { useRoute } from "vue-router";
 
 
 onMounted(()=>{
-    console.log(route.id)
     axios.get(`/api/companies/${route.params.id}/edit`).then((res)=>{
         if(res.status == 200) {
             formdata.value.id = res.data.id;
@@ -91,29 +90,30 @@ onMounted(()=>{
 
 })
   
-//   const submitform = async () => {
-  
-//     await axios
-//       .post("/api/companies/update/", formdata.value)
-//       .then((res) => {
-//         if (res.status) {
-//           Swal.fire({
-//             position: "top-end",
-//             icon: "success",
-//             title: "Your work has been saved",
-//             showConfirmButton: false,
-//             timer: 1500,
-//           });
-//         }
-//       })
-//       .catch((err) => {
-//         Swal.fire({
-//           position: "top-end",
-//           icon: "error",
-//           title: "Your work has been saved",
-//           showConfirmButton: false,
-//           timer: 1500,
-//         });
-//       });
-//   };
+   const submitform = async () => {
+     await axios
+       .post("/api/companies/update", formdata.value)
+       .then((res) => {
+         if (res.status == 200) {
+           Swal.fire({
+             position: "top-end",
+             icon: "success",
+             title: "Your work has been edited",
+             showConfirmButton: false,
+             timer: 1500,
+           });
+           router.push('companiesList')
+         }
+       })
+       .catch((err) => {
+         Swal.fire({
+           position: "top-end",
+           icon: "error",
+           title: "Your work has been saved",
+           showConfirmButton: false,
+           timer: 1500,
+         });
+       });
+   };
+
   </script>

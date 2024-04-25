@@ -55,8 +55,6 @@ const router = useRouter();
 const formData = ref({
     email:'',
     password:'',
-    device_name:'browser',
-
 })
 
 const login = ()=>{
@@ -67,8 +65,6 @@ const login = ()=>{
             router.push('/add-user')
         }
         localStorage.setItem('token',res.data.token)
-        console.log(res.data)
-        console.log(localStorage.getItem('token'))
         router.push('/users-list');
 
     }).catch((err)=>{

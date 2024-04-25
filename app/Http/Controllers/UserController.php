@@ -36,51 +36,59 @@ class UserController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($request->all(), [
-            'name'=> 'required|string|max:50',
-            'email'=>'required|string|email',
-            'password'=>'required|string',
+            'name' => 'required|string|max:50',
+            'email' => 'required|string|email',
+            'password' => 'required|string',
             // 'confirmPassword'=>'required|accepted|string|samepassword',
         ]);
-        if($validator->fails()){
-            return response()->json(['errors' => $validator->errors()],422);
-        }else{
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        } else {
 
             User::create([
-                'name'=>$request->input('name'),
-                'email'=>$request->input('email'),
-                'password'=>$request->input('password'),
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
             ]);
-            
-            return response()->json(['message'=>'Form Submited Successfully'] ,200);
+
+            return response()->json(['message' => 'Form Submited Successfully'], 200);
         }
     }
 
 
-    public function login (Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
+            'password' => 'required|string',
         ]);
+        $users = User::all();
 
-        if(Auth::attempt($request->only('email' , 'password'))){
+        foreach ($users as $user) {
+                $user->password = Hash::make($user->password);
+                $user->save();
+
+        }
+        $password = Hash::make($request->input('password'));
+
+        if (Auth::attempt($request->only('email', 'password'))) {
 
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
-            return response()->json(['token'=> $token], 200); 
+            return response()->json(['token' => $token], 200);
         }
-     
-        return response()->json(['message'=>'invalid ceradintialty'] ,422);
+
+        return response()->json(['message' => 'invalid ceradintialty'], 422);
 
         $user = User::where('email', $request->email)->first();
-        
-        
+
+
         // if (! $user || ! Hash::check($request->password, $user->password)) {
         //     throw ValidationException::withMessages([
         //         'email' => ['The provided credentials are incorrect.'],
         //     ]);
         // }
-     
+
         // return $user->createToken($request->email)->plainTextToken;
     }
     /**
