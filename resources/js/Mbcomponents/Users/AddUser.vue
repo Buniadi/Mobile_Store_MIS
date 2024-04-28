@@ -8,20 +8,20 @@
     <div class="col-12 p-2">
       <form class="d-flex gap-3 justify-content-between">
         <div class="d-flex flex-column justify-content-between gap-2 col-4">
-          <div class="form-group col-8">
+          <div class="form-group col-10">
             <label for="exampleInputName" class="form-label mt-4">Name</label>
             <input
               type="text"
               class="form-control"
               id="exampleInputName"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
+              aria-describedby="nameHelp"
+              placeholder="Enter Name"
               v-model="formdata.name"
             />
           </div>
-          <div class="form-group col-8">
+          <div class="form-group col-10">
             <label for="exampleInputEmail1" class="form-label mt-4"
-              >Email address</label
+              >Email</label
             >
             <input
               type="email"
@@ -34,7 +34,7 @@
             />
           </div>
 
-          <div class="form-group col-8">
+          <div class="form-group col-10">
             <label for="exampleInputPassword1" class="form-label mt-4"
               >Password</label
             >
@@ -47,7 +47,7 @@
               v-model="formdata.password"
             />
           </div>
-          <div class="form-group col-8">
+          <div class="form-group col-10">
             <label for="exampleInputPassword1" class="form-label mt-4"
               >Password Confirmation</label
             >
@@ -66,7 +66,7 @@
           class="d-flex flex-column justify-content-around col-6 "
         >
 
-        <div class="form-group col-8">
+        <div class="form-group col-9">
           <label for="exampleInputPhone1" class="form-label mt-4"
             >Phone</label
           >
@@ -80,7 +80,7 @@
             v-model="formdata.phone"
           />
         </div>
-        <div class="form-group col-8">
+        <div class="form-group col-9 bd-danger">
           <label for="exampleInputAddress1" class="form-label mt-4"
             >Address</label
           >
@@ -94,7 +94,23 @@
             v-model="formdata.address"
           />
         </div>
-        <div class="form-group col-8">
+
+        <div class="form-group col-9">
+          <label for="exampleInputPosition1" class="form-label mt-4"
+            >position</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputPosition1"
+            aria-describedby="PositionHelp"
+            placeholder="Enter Position Number"
+            autocomplete="off"
+            v-model="formdata.position"
+          />
+        </div>
+
+        <div class="form-group col-9" >
           <label for="exampleInputPhoto1" class="form-label mt-4"
             >Photo</label
           >
@@ -136,6 +152,7 @@ const formdata = ref({
   phone:"",
   address:"",
   photo:"",
+  position:"",
 });
 
 const handleImageUpload = (event)=>{
