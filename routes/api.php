@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function (){
     Route::get('/user-list' , [UserController::class , 'index']);
-    Route::post('/add-user' , [UserController::class , 'store']);
     // Route::get('/')
     
     
@@ -34,4 +33,5 @@ Route::middleware('auth:sanctum')->group(function (){
 });
 
 
+Route::post('/add-user' , [UserController::class , 'store']);
 Route::post('/login' , [UserController::class , 'login']);

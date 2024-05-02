@@ -142,8 +142,10 @@ import axios from "axios";
 import { ref } from "vue";
 import Swal from "sweetalert2";
 import InputText from "primevue/inputtext";
+import { useRoute, useRouter } from "vue-router";
 
 
+const route = useRouter();
 const formdata = ref({
   name: "",
   email: "",
@@ -151,7 +153,6 @@ const formdata = ref({
   confirmPassword: "",
   phone:"",
   address:"",
-  photo:"",
   position:"",
 });
 
@@ -161,17 +162,17 @@ const handleImageUpload = (event)=>{
     formdata.value.photo = file   
   }
 }
-axios.interceptors.request.use((config) => {
-  // Retrieve the token from where you stored it (e.g., Vuex store or localStorage)
-  const token = localStorage.getItem("token"); // Make sure to replace 'token' with your actual token key
+// axios.interceptors.request.use((config) => {
+//   // Retrieve the token from where you stored it (e.g., Vuex store or localStorage)
+//   const token = localStorage.getItem("token"); // Make sure to replace 'token' with your actual token key
 
-  // If a token exists, add it to the request headers
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+//   // If a token exists, add it to the request headers
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
 
-  return config;
-});
+//   return config;
+// });
 
 const submitform = async () => {
 
@@ -192,6 +193,7 @@ const submitform = async () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        route.push('users-list');
       }
     })
     .catch((err) => {
