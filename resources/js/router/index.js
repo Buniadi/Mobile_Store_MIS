@@ -8,6 +8,9 @@ import Login from "../components/auth/Login.vue";
 import CompaniesList from "../Mbcomponents/Companies/CompaniesList.vue";
 import AddCompanies from "../Mbcomponents/Companies/AddCompanies.vue";
 import EditCompanies from "../Mbcomponents/Companies/EditCompanies.vue";
+import PropertyList from "../Mbcomponents/Properties/PropertyList.vue";
+import AddProperty from "../Mbcomponents/Properties/AddProperty.vue";
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -71,6 +74,22 @@ const router = createRouter({
                 requiresAuth: true,
             },
         },
+        {
+            path:"/PropertyList",
+            name: "propertyList",
+            component:PropertyList,
+            meta:{
+                requiresAuth:true,
+            }
+        },
+        {
+            path:'/add-proprty',
+            name:"addProprty",
+            component:AddProperty,
+            meta:{
+                requiresAuth:true,
+            }
+        }
     ],
 });
 

@@ -12,7 +12,7 @@
             <router-link :to="{name:'users-list'}">Users</router-link>
         </li>
         <li>
-            <RouterLink :to="{ name: 'about' }">About</RouterLink>
+            <RouterLink :to="{ name: 'propertyList' }">Property List</RouterLink>
         </li>
         <li>
             <RouterLink :to="{ name: 'home' }">Home</RouterLink>

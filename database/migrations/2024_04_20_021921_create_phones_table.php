@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
-            $table->string('company');
+            $table->unsignedBigInteger('company_id');
             $table->string('battery_level');
             $table->string('model');
             $table->string('photo');
@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('power_type');
             $table->string('memory');
             $table->string('camera_n');
-            $table->string('status');
+            $table->string('ram');
+            $table->enum('status',['0','1'])->default('1');
             $table->timestamps();
         });
     }

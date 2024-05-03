@@ -13,4 +13,8 @@ class Company extends Model
         'country',
         'created_by',
     ];
+
+    public function phones(){
+        return $this->hasMany(Phone::class);
+    }
 }

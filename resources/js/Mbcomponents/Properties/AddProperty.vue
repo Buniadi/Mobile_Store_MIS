@@ -7,8 +7,8 @@
       </div>
       <div class="col-12 p-2">
         <form class="d-flex gap-3 justify-content-between">
-          <div class="d-flex flex-column justify-content-between gap-2 col-4">
-            <div class="form-group col-10">
+          <div class="d-flex flex-column  gap-2 col-4 ">
+            <div class="form-group col-10 ">
               <label for="exampleInputName" class="form-label mt-4">Name</label>
               <input
                 type="text"
@@ -19,7 +19,7 @@
                 v-model="formdata.name"
               />
             </div>
-            <div class="form-group col-10">
+            <div class="form-group col-10 ">
               <label for="exampleInputEmail1" class="form-label mt-4"
                 >company</label
               >
@@ -60,40 +60,41 @@
                 v-model="formdata.Battery_level"
               />
             </div>
+
+            <div class="form-group col-10">
+                <label for="exampleInputRAM1" class="form-label mt-4"
+                  >RAM</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputRAM1"
+                  aria-describedby="RAMHelp"
+                  placeholder="Enter RAM Number"
+                  autocomplete="off"
+                  v-model="formdata.ram"
+                />
+              </div>
+              <div class="form-group col-10 bd-danger">
+                <label for="exampleInputCameraPexel1" class="form-label mt-4"
+                  >Pexel Number</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputCameraPexel1"
+                  aria-describedby="Camera PexelHelp"
+                  placeholder="Enter Camera Pexel Number"
+                  autocomplete="off"
+                  v-model="formdata.pexel"
+                />
+              </div>
+
           </div>
   
           <div
             class="d-flex flex-column justify-content-around col-6 "
           >
-  
-          <div class="form-group col-9">
-            <label for="exampleInputRAM1" class="form-label mt-4"
-              >RAM</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputRAM1"
-              aria-describedby="RAMHelp"
-              placeholder="Enter RAM Number"
-              autocomplete="off"
-              v-model="formdata.ram"
-            />
-          </div>
-          <div class="form-group col-9 bd-danger">
-            <label for="exampleInputCameraPexel1" class="form-label mt-4"
-              >Pexel Number</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputCameraPexel1"
-              aria-describedby="Camera PexelHelp"
-              placeholder="Enter Camera Pexel Number"
-              autocomplete="off"
-              v-model="formdata.pexel"
-            />
-          </div>
   
           <div class="form-group col-9">
             <label for="exampleInputfinger1" class="form-label mt-4"
