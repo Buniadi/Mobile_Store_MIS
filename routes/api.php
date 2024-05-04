@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function (){
     // Route::get('/test', function (){
     //     return 
     // });
+    Route::post('/add-phone', [PhoneController::class , 'store']);
     Route::delete('/comapanies/delete/{id}', [CompanyController::class, 'delete']);
 });
 

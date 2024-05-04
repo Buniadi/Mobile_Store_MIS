@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('battery_level');
             $table->string('model');
             $table->string('photo');
-            $table->string('cam_pexel');
-            $table->string('fingerprint');
-            $table->string('face');
+            $table->integer('cam_pexel');
+            $table->enum('fingerprint',['0','1'])->default('0');
+            $table->enum('face',['0','1'])->default('0');
             $table->string('power_type');
             $table->string('memory');
             $table->string('camera_n');

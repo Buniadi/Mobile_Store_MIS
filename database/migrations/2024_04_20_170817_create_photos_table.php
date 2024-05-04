@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->string('extension');
+            $table->unsignedBigInteger('phone_id');
             $table->string('photo');
             $table->string('video');
             $table->string('address');

@@ -53,7 +53,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .notifications {
   .list-move {
     transition: transform 0.3s, opacity 0.4s;
