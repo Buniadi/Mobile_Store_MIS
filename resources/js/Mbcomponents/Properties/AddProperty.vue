@@ -8,13 +8,16 @@
     <div class="col-12 p-2">
       <form class="d-flex gap-3 justify-content-between">
         <div class="d-flex flex-column gap-2 col-4">
+            {{ companies }}
             <Dropdown
               v-model="selectedCity"
-              :options="cities"
+              :options="companies"
               optionLabel="name"
               placeholder="Select a City"
               class="w-full md:w-14rem"
             />
+
+            {{ selectedCity }}
 
 
           <div class="form-group col-10">
@@ -184,20 +187,14 @@
   
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Swal from "sweetalert2";
 import InputText from "primevue/inputtext";
 import { useRoute, useRouter } from "vue-router";
 import Dropdown from "primevue/dropdown";
 
 const selectedCity = ref();
-const cities = ref([
-  { name: "New York", code: "NY" },
-  { name: "Rome", code: "RM" },
-  { name: "London", code: "LDN" },
-  { name: "Istanbul", code: "IST" },
-  { name: "Paris", code: "PRS" },
-]);
+const companies = ref();
 
 const route = useRouter();
 const formdata = ref({
@@ -233,13 +230,23 @@ const handleImageUpload = (event) => {
 //   return config;
 // });
 
-const submitform = async () => {
-  const formData = new FormData();
+onMounted( ()=>{
+    axios.get("/api/allcompanies").then((res) => {
+        console.log(res.data)
+    companies.value = res.data;
+  }).catch((err)=>{
+        console.log(err)
+    })
+})
 
+
+const submitform = async () => {
+    const formData = new FormData();
   for (let key in formdata.value) {
     const value = formdata.value[key];
     formData.append(key, value);
   }
+
   await axios
     .post("/api/add-phone", formData)
     .then((res) => {
@@ -263,5 +270,6 @@ const submitform = async () => {
         timer: 1500,
       });
     });
-};
+}
+
 </script>

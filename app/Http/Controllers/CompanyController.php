@@ -14,6 +14,10 @@ class CompanyController extends Controller
         $companies = Company::paginate(10);
         return response()->json($companies);
     }
+    public function getall(){
+        $companies = Company::all();
+        return response()->json($companies);
+    }
     
     public function store(companyRequest $request)
     {

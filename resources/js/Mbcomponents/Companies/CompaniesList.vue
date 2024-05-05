@@ -50,6 +50,7 @@ import Swal from "sweetalert2";
 const companies_info = ref(null);
 
 onMounted(() => {
+  console.log("COmes")
   axios.get("/api/companies").then((res) => {
     companies_info.value = res.data.data;
   });
