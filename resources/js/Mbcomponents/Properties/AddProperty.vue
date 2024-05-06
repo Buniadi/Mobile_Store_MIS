@@ -16,11 +16,10 @@
               placeholder="Select a City"
               class="w-full md:w-14rem"
             />
+{{ formdata.company }}
 
-            {{ selectedCity }}
 
-
-          <div class="form-group col-10">
+          <!-- <div class="form-group col-10">
             <label for="exampleInputEmail1" class="form-label mt-4"
               >company</label
             >
@@ -33,7 +32,7 @@
               autocomplete="off"
               v-model="formdata.company"
             />
-          </div>
+          </div> -->
 
           <div class="form-group col-10">
             <label for="exampleInputModel1" class="form-label mt-4"
@@ -198,13 +197,12 @@ const companies = ref();
 
 const route = useRouter();
 const formdata = ref({
-  name: "",
-  company: "",
+  company: selectedCity.value,
   model: "",
   battery_level: "",
   ram: "",
-  finger: "",
-  face: "",
+  finger: false,
+  face: false,
   powertype: "",
   memory: "",
   camera_quantity: "",
@@ -241,6 +239,9 @@ onMounted( ()=>{
 
 
 const submitform = async () => {
+    // console.log(selectedCity.value.name)
+    formdata.value.company = selectedCity.value.name
+    console.log(formdata.value.company)
     const formData = new FormData();
   for (let key in formdata.value) {
     const value = formdata.value[key];
@@ -258,7 +259,7 @@ const submitform = async () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        route.push("users-list");
+        // route.push("users-list");
       }
     })
     .catch((err) => {
