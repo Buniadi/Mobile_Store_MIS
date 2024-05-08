@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Phonerequest;
+use App\Http\Requests\phoneRequest;
 use App\Models\Phone;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,8 @@ class PhoneController extends Controller
      */
     public function index()
     {
-        //
+        $phone = Phone::paginate(10);
+        return response()->json($phone);
     }
 
     /**
@@ -27,47 +28,42 @@ class PhoneController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Phonerequest $request)
+    public function store(phoneRequest $request)
     {
-
         $data = $request->all();
 
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
 
             // $storedImagePath = Storage::putFile('usersImage', $image);
-            $storedImagePath = $image->store("userImage", 'public');
+            $storedImagePath = $image->store("phoneImage", 'public');
             Phone::create([
-                'name' => $request->input('name'),
-                ' company_id ' => $request->input(' company_id '),
-                'battery_level' => Hash::make($request->input('battery_level')),
-                'model' => $request->input('model'),
-                'fingerprint' => $request->input('fingerprint'),
-                'photo' => $storedImagePath,
-                'face' => $request->input('face'),
-                'power_type' => $request->input('power_type'),
-                'memory' => $request->input('memory'),
-                'camera_n' => $request->input('camera_n'),
-                'ram' => $request->input('ram')
-            ]);} else {
-            Phone::create([
-                'name' => $request->input('name'),
-                ' company_id ' => $request->input(' company_id '),
+                'company_id' => $request->input('company'),
                 'battery_level' =>$request->input('battery_level'),
                 'model' => $request->input('model'),
-                'fingerprint' => $request->input('fingerprint'),
-                'face' => $request->input('face'),
-                'power_type' => $request->input('power_type'),
+                'fingerprint' => $request->input('fingerprint') ? '1' : '0',
+                'face' => $request->input('face') ? '1' : '0',
+                'power_type' => $request->input('powertype'),
+                'photo' => $storedImagePath,
                 'memory' => $request->input('memory'),
-                'camera_n' => $request->input('camera_n'),
-                'ram' => $request->input('ram')
+                'camera_n' => $request->input('camera_quantity'),
+                'ram' => $request->input('ram'),
+                'cam_pexel'=> $request->input('pexel')
+            ]);} else {
+            Phone::create([
+                'company_id' => $request->input('company'),
+                'battery_level' =>$request->input('battery_level'),
+                'model' => $request->input('model'),
+                'fingerprint' => $request->input('fingerprint') ? '1' : '0',
+                'face' => $request->input('face') ? '1' : '0',
+                'power_type' => $request->input('powertype'),
+                'memory' => $request->input('memory'),
+                'camera_n' => $request->input('camera_quantity'),
+                'ram' => $request->input('ram'),
+                'cam_pexel'=> $request->input('pexel')
             ]);
         }
-
         return response()->json(['message' => 'Form Submited Successfully'], 200);
-
-        return response()->json('hi');
-
     }
 
     /**
@@ -83,7 +79,7 @@ class PhoneController extends Controller
      */
     public function edit(Phone $phone)
     {
-        //
+        return response()->json($phone);
     }
 
     /**

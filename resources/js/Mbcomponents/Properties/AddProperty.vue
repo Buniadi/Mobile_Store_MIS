@@ -8,7 +8,7 @@
     <div class="col-12 p-2">
       <form class="d-flex gap-3 justify-content-between">
         <div class="d-flex flex-column gap-2 col-4">
-            {{ companies }}
+
             <Dropdown
               v-model="selectedCity"
               :options="companies"
@@ -16,7 +16,6 @@
               placeholder="Select a City"
               class="w-full md:w-14rem"
             />
-{{ formdata.company }}
 
 
           <!-- <div class="form-group col-10">
@@ -100,7 +99,7 @@
               id="exampleInputfinger1"
               v-model="formdata.finger"
             />
-            {{ formdata.finger }}
+            
           </div>
 
           <div class="form-group">
@@ -111,7 +110,7 @@
               id="exampleInputface1"
               v-model="formdata.face"
             />
-            {{ formdata.face }}
+            
           </div>
 
           <div class="form-group col-9">
@@ -216,6 +215,17 @@ const handleImageUpload = (event) => {
     formdata.value.photo = file;
   }
 };
+
+onMounted( ()=>{
+    axios.get("/api/allcompanies").then((res) => {
+        console.log(res.data)
+        companies.value = res.data;
+    }).catch((err)=>{
+        console.log(err)
+    })
+})
+
+
 // axios.interceptors.request.use((config) => {
 //   // Retrieve the token from where you stored it (e.g., Vuex store or localStorage)
 //   const token = localStorage.getItem("token"); // Make sure to replace 'token' with your actual token key
@@ -227,20 +237,11 @@ const handleImageUpload = (event) => {
 
 //   return config;
 // });
-
-onMounted( ()=>{
-    axios.get("/api/allcompanies").then((res) => {
-        console.log(res.data)
-    companies.value = res.data;
-  }).catch((err)=>{
-        console.log(err)
-    })
-})
-
-
 const submitform = async () => {
+
+
     // console.log(selectedCity.value.name)
-    formdata.value.company = selectedCity.value.name
+    formdata.value.company = selectedCity.value.id
     console.log(formdata.value.company)
     const formData = new FormData();
   for (let key in formdata.value) {
@@ -249,8 +250,7 @@ const submitform = async () => {
   }
 
   await axios
-    .post("/api/add-phone", formData)
-    .then((res) => {
+    .post("/api/add-phone", formData).then((res) => {
       if (res.status) {
         Swal.fire({
           position: "top-end",

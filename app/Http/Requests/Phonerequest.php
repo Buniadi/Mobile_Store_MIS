@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Phonerequest extends FormRequest
+class phoneRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class Phonerequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company' => 'required|string|max:30',
+            'company' => 'required|string',
             'model' => 'required|string',
             'battery_level' => 'required|string',
             'ram' => 'required|string',
@@ -30,7 +30,7 @@ class Phonerequest extends FormRequest
             'powertype' => 'required|string',
             'memory' => 'required|string',
             'camera_quantity' => 'required|string',
-            'photo' => 'string|max:50',
+            // 'photo' => 'string|max:50',
             'pexel' => 'required|string',
         ];
     }

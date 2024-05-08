@@ -10,6 +10,8 @@ import AddCompanies from "../Mbcomponents/Companies/AddCompanies.vue";
 import EditCompanies from "../Mbcomponents/Companies/EditCompanies.vue";
 import PropertyList from "../Mbcomponents/Properties/PropertyList.vue";
 import AddProperty from "../Mbcomponents/Properties/AddProperty.vue";
+import EditPhone from "../Mbcomponents/Properties/EditPhone.vue";
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -86,6 +88,14 @@ const router = createRouter({
             path:'/add-proprty',
             name:"addProprty",
             component:AddProperty,
+            meta:{
+                requiresAuth:true,
+            }
+        },
+        {
+            path:'/phone/:id/edit',
+            name:"edit-phone",
+            component:EditPhone,
             meta:{
                 requiresAuth:true,
             }

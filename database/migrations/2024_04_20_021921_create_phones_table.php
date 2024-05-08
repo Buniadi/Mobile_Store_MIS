@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('company_id');
             $table->string('battery_level');
             $table->string('model');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->integer('cam_pexel');
             $table->enum('fingerprint',['0','1'])->default('0');
             $table->enum('face',['0','1'])->default('0');

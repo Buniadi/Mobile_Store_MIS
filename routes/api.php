@@ -25,17 +25,18 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::get('/user-list' , [UserController::class , 'index']);
     // Route::get('/')
     
-    
     Route::get('/companies' , [CompanyController::class , 'index']);
     Route::get('/allcompanies' , [CompanyController::class , 'getall']);
     Route::post('/add-company', [CompanyController::class , 'store']);
     Route::get('/companies/{id}/edit', [CompanyController::class , 'edit']);
     Route::post('/companies/update', [CompanyController::class, 'update']);
+    Route::delete('/comapanies/delete/{id}', [CompanyController::class, 'delete']);
     // Route::get('/test', function (){
     //     return 
     // });
     Route::post('/add-phone', [PhoneController::class , 'store']);
-    Route::delete('/comapanies/delete/{id}', [CompanyController::class, 'delete']);
+    Route::get('/allphone', [PhoneController::class , 'index']);
+    Route::get('/phone/{id}/edit', [PhoneController::class , 'edit']);
 });
 
 
