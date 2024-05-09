@@ -77,9 +77,9 @@ class PhoneController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Phone $phone)
+    public function edit(Phone $id)
     {
-        return response()->json($phone);
+        return response()->json($id);
     }
 
     /**

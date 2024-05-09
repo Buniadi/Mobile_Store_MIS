@@ -61,20 +61,18 @@
 <script setup>
 import axios from "axios";
 import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const phones = ref(null);
 
-const route = useRoute()
-
 onMounted(() => {
   axios
-    .get(`/api/phone/${route.params.id}/edit`)
+    .get("/api/allphone")
     .then((res) => {
-      console.log(res.data);
-    //   phones.value = res.data.data;
+      console.log(res.data.data);
+      phones.value = res.data.data;
     })
     .catch((err) => {
       console.log(err);
