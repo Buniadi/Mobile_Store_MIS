@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('/add-phone', [PhoneController::class , 'store']);
     Route::get('/allphone', [PhoneController::class , 'index']);
     Route::get('/phone/{id}/edit', [PhoneController::class , 'edit']);
+    ROute::post('/phone/update', [PhoneController::class , 'update']);
 });
 
 

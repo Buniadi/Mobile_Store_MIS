@@ -85,9 +85,47 @@ class PhoneController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Phone $phone)
+    public function update(phoneRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $phone = Phone::find($request->phone_id);
+        // $phone->update([
+        //         'battery_level' => $request->battery_level,
+        //         ]);
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+
+            // $storedImagePath = Storage::putFile('usersImage', $image);
+            $storedImagePath = $image->store("phoneImage", 'public');
+            $phone->update([
+                'company_id' => $request->input('company'),
+                'battery_level' =>$request->input('battery_level'),
+                'model' => $request->input('model'),
+                'fingerprint' => $request->input('fingerprint') ? '1' : '0',
+                'face' => $request->input('face') ? '1' : '0',
+                'power_type' => $request->input('powertype'),
+                'photo' => $storedImagePath,
+                'memory' => $request->input('memory'),
+                'camera_n' => $request->input('camera_quantity'),
+                'ram' => $request->input('ram'),
+                'cam_pexel'=> $request->input('pexel')
+            ]);} else {
+            $phone->update([
+                'company_id' => $request->input('company'),
+                'battery_level' =>$request->input('battery_level'),
+                'model' => $request->input('model'),
+                'fingerprint' => $request->input('fingerprint') ? '1' : '0',
+                'face' => $request->input('face') ? '1' : '0',
+                'power_type' => $request->input('powertype'),
+                'memory' => $request->input('memory'),
+                'camera_n' => $request->input('camera_quantity'),
+                'ram' => $request->input('ram'),
+                'cam_pexel'=> $request->input('pexel')
+            ]);
+        }
+        return response()->json(['message' => 'Form Submited Successfully'], 200);
+
     }
 
     /**

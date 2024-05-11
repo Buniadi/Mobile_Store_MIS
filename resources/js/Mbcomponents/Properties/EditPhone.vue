@@ -178,6 +178,7 @@ import Dropdown from "primevue/dropdown";
 const route = useRouter();
 const router = useRoute();
 const formdata = ref({
+  phone_id: router.params.id,
   company: "",
   model: "",
   battery_level: "",
@@ -245,7 +246,7 @@ const submitform = async () => {
   }
 
   await axios
-    .post("/api/add-phone", formData)
+    .post("/api/phone/update", formData)
     .then((res) => {
       if (res.status) {
         Swal.fire({
