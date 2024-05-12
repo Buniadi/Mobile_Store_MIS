@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\phoneRequest;
 use App\Models\Phone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhoneController extends Controller
 {
@@ -94,7 +95,12 @@ class PhoneController extends Controller
         //         'battery_level' => $request->battery_level,
         //         ]);
         if ($request->hasFile('photo')) {
+
+            if($phone->photo){
+                Storage::disk('public')->delete('phoneImage',$phone->photo);
+            }
             $image = $request->file('photo');
+
 
             // $storedImagePath = Storage::putFile('usersImage', $image);
             $storedImagePath = $image->store("phoneImage", 'public');
@@ -133,6 +139,7 @@ class PhoneController extends Controller
      */
     public function destroy(Phone $phone)
     {
+        return response()->json('success',200);
         //
     }
 }

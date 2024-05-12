@@ -62,6 +62,7 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import Swal from "sweetalert2";
 
 const router = useRouter();
 
@@ -78,6 +79,34 @@ onMounted(() => {
       console.log(err);
     });
 });
+
+const handleDelete = (id) =>{
+  Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this company.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Delete the company
+        axios.delete(`/api/phone/${id}/delete`).then((res)=>{
+          if(res.status == 200){
+            console.log(res)
+            Swal.fire({
+             position: "top-end",
+             icon: "success",
+             title: "res.message",
+             showConfirmButton: false,
+             timer: 1500,
+           });
+          }
+        })
+      }
+    });
+}
 </script>
 
 <style scoped></style>
